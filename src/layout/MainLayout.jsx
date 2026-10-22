@@ -1,5 +1,6 @@
 import { Link, Outlet, useNavigation } from 'react-router-dom';
 import Loader from '../components/Loader';
+import Header from '../components/Header';
 
 export default function MainLayout() {
   const navigation = useNavigation();
@@ -8,7 +9,7 @@ export default function MainLayout() {
     <div className="container">
       <header className="header">
         <Link to="/" className="logo">
-          Мини-маркетплейс
+          <Header />
         </Link>
 
         <nav>
