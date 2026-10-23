@@ -1,30 +1,7 @@
-import ProductCard from './ProductCard';
-
-export default function ProductsList({ products }) {
-    if (!products.length) {
-        return <p className="empty-message">Продукты не найдены.</p>;
-    }
-
-    return (
-        <div className="products">
-            {products.map((product) => (
-                <ProductCard key={product.id} recipe={product} />
-            ))}
-        </div>
-    );
-}
-
-import {
-    useMutation,
-    useQuery,
-    useQueryClient,
-} from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient, } from "@tanstack/react-query";
 import { useState } from "react";
-import {
-    createProduct,
-    getProducts,
-    updateProduct,
-} from "../api/products";
+import { createProduct, getProducts, updateProduct, } from "../api/products";
+import ProductCard from "./ProductCard";
 
 export function AddProductForm() {
     const queryClient = useQueryClient();
@@ -42,12 +19,7 @@ export function AddProductForm() {
         queryFn: getProducts,
     });
 
-    const {
-        mutate,
-        isPending,
-        isError,
-        error: mutationError,
-    } = useMutation({
+    const { mutate, isPending, isError, error: mutationError, } = useMutation({
         mutationFn: (product) => {
             if (editingId !== null) {
                 return updateProduct({
@@ -133,16 +105,15 @@ export function AddProductForm() {
                 <p>Ошибка сохранения: {mutationError.message}</p>
             )}
 
-            <ul>
+            <ul style={{
+                textDecoration: 'none'
+            }}>
                 {products.map((product) => (
-                    <li
+                    <ProductCard
                         key={product.id}
+                        product={product}
                         onDoubleClick={() => handleEdit(product)}
-                        title="Дважды нажмите, чтобы изменить"
-                        style={{ cursor: "pointer" }}
-                    >
-                        {product.title} — {product.price} — рейтинг: {product.rating}
-                    </li>
+                    />
                 ))}
             </ul>
         </form>

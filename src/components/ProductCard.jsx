@@ -1,27 +1,39 @@
-import { Link } from "react-router-dom"
-import { useRecipeStore } from "../store/useRecipeStore"
+import { Card } from 'antd';
+import React from 'react';
+import {useProductStore} from '../store/useProductStore'
 
-export default function ProductCard({ recipe }) {
-    const { favorites, toggleFavorite } = useRecipeStore()
+const ProductCard = ( product ) => {
+
+    const { cart, favorites, toggleFavorite } = useProductStore()
 
     const isFavorite = favorites.some(
         (item) => item.id === recipe.id
     )
 
-    return (
-        <div className="recipe-card">
-            <Link to={`/recipes/${recipe.id}`}>
-                <img src={recipe.image} alt={recipe.name} />
-
-                <h3>{recipe.name}</h3>
-            </Link>
-
-            <p>Кухня: {recipe.cuisine}</p>
-            <p>Рейтинг: ⭐ {recipe.rating}</p>
-
-            <button onClick={() => toggleFavorite(recipe)}>
-                {isFavorite ? 'Убрать из избранного' : 'В избранное'}
-            </button>
-        </div>
+    const isCart = cart.some(
+        (item) => item.id === recipe.id
     )
+    return (
+        <div>
+            <Card key={product.id}
+                title="Дважды нажмите, чтобы изменить"
+                style={{ cursor: "pointer" }}>
+                <Link to={`/product/${product.id}`}>
+                    <img src={product.image} alt={product.name} />
+
+                    <h3>{product.name}</h3>
+                    <span>{product.cost}</span>
+                </Link>
+
+                <p>Рейтинг: ⭐ {product.rating}</p>
+
+                <button onClick={() => toggleFavorite(recipe)}>
+                    {isFavorite ? 'Убрать из избранного' : 'В избранное'}
+                    {isCart ? 'Убрать из корзины' : 'В корзину'}
+                </button>
+            </Card>
+        </div>
+    );
 }
+
+export default ProductCard;
