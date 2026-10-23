@@ -16,13 +16,13 @@ export default function ProductFilters({ categories = [] }) {
             {categories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}
         </select>
         <div className="price-fields">
-            <input aria-label="Минимальная цена"
+            <input
                 type="number"
                 min="0"
                 placeholder="Цена от"
                 value={params.get('price_min') || ''} onChange={(event) => setFilter('price_min', event.target.value)} />
             <span>—</span>
-            <input aria-label="Максимальная цена"
+            <input 
                 type="number"
                 min="0"
                 placeholder="до"

@@ -1,11 +1,11 @@
 import { Link, NavLink } from 'react-router-dom'
 import { useProductStore } from '../store/useProductStore.jsx'
 
-export default function Header() {
+function Header() {
     const favoriteCount = useProductStore((state) => state.favorites.length)
     const cartCount = useProductStore((state) => state.cart.reduce((sum, item) => sum + item.quantity, 0))
 
-    return
+    return(
     <header style={{
         display: 'flex',
         alignItems: 'center',
@@ -26,4 +26,6 @@ export default function Header() {
             <Link to="/create">Добавить товар</Link>
         </div>
     </header>
-}
+)}
+
+export default Header

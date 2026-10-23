@@ -26,10 +26,10 @@ export const updateProduct = async ({ id, changes }) => {
   return data;
 }
 
-export async function getProducts(params = {}) {
-  const { data } = await api.get('/products', { params })
-  return Array.isArray(data) ? data : []
-}
+// export async function getProducts(params = {}) {
+//   const { data } = await api.get('/products', { params })
+//   return Array.isArray(data) ? data : []
+// }
 
 export async function getProduct(id) {
   const { data } = await api.get(`/products/${id}`)
@@ -41,10 +41,10 @@ export async function getCategories() {
   return Array.isArray(data) ? data : []
 }
 
-export async function createProduct(product) {
-  const { data } = await api.post('/products/', product)
-  return data
-}
+// export async function createProduct(product) {
+//   const { data } = await api.post('/products/', product)
+//   return data
+// }
 
 export async function deleteProduct(id) {
   const { data } = await api.delete(`/products/${id}`)

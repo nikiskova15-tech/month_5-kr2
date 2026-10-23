@@ -19,9 +19,7 @@ export default function CartPage() {
                         {cart.map((item) => (
                             <div key={item.id}>
                                 <Link to={`/products/${item.id}`}>
-
-                                    <img src={item.images[0]} alt={item.title} />
-
+                                    <img src={item.image} alt={item.title} />
                                 </Link>
 
                                 <div >
