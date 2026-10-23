@@ -10,11 +10,7 @@ export function AddProductForm() {
     const [price, setPrice] = useState("");
     const [editingId, setEditingId] = useState(null);
 
-    const {
-        data: products = [],
-        isLoading,
-        error: queryError,
-    } = useQuery({
+    const { data: products = [], isLoading, error: queryError, } = useQuery({
         queryKey: ["products"],
         queryFn: getProducts,
     });
