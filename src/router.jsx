@@ -1,30 +1,27 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom'
+import MainLayout from './layout/MainLayout'
+import HomePage from './pages/HomePage'
+import ProductPage from './pages/ProductPage'
+import FavoritesPage from './pages/FavoritesPage'
+import CartPage from './pages/CartPage'
+import AddProductPage from './pages/AddProductPage'
+import NotFoundPage from './pages/NotFoundPage'
 
-import MainLayout from './layouts/MainLayout';
-import HomePage from './pages/HomePage';
-import ProductPage from './pages/ProductPage';
-import FavoritesPage from './pages/FavoritesPage';
-import CartPage from './pages/CartPage';
-import NotFoundPage from './pages/NotFoundPage';
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <MainLayout />,
+    errorElement: <NotFoundPage />,
+    children: [
+      { index: true, element: <HomePage /> },
+      { path: 'products/:id', element: <ProductPage /> },
+      { path: 'products/:id/edit', element: <AddProductPage /> },
+      { path: 'create', element: <AddProductPage /> },
+      { path: 'favorites', element: <FavoritesPage /> },
+      { path: 'cart', element: <CartPage /> },
+      { path: '*', element: <NotFoundPage /> },
+    ],
+  },
+])
 
-import {  } from './api/api';
-import Loader from './components/Loader';
-
-const router = createBrowserRouter(
-    [
-        {
-            path: '/',
-            element: <MainLayout />,
-            errorElement: <NotFoundPage />,
-            children: [
-                { index: true, element: <HomePage />, loader: Loader },
-                { path: '/:id', element: <ProductPage />, loader: Loader },
-                { path: 'cart', element: <CartPage />, loader: getRecipe },
-                { path: 'favorites', element: <FavoritesPage /> },
-                { path: '*', element: <NotFoundPage /> }
-            ]
-        }
-    ]
-);
-
-export default router;
+export default router

@@ -11,45 +11,33 @@ export const useProductStore = create(
 
       toggleFavorite: (product) =>
         set((state) => ({
-          favorites: state.favorites.some((item) =>
-            sameProduct(item.id, product.id),
-          )
-            ? state.favorites.filter(
-                (item) => !sameProduct(item.id, product.id),
-              )
+          favorites: state.favorites.some((item) => sameProduct(item.id, product.id))
+            ? state.favorites.filter((item) => !sameProduct(item.id, product.id))
             : [...state.favorites, product],
         })),
 
       removeFromFavorites: (id) =>
         set((state) => ({
-          favorites: state.favorites.filter(
-            (item) => !sameProduct(item.id, id),
-          ),
+          favorites: state.favorites.filter((item) => !sameProduct(item.id, id)),
         })),
 
       clearFavorites: () => set({ favorites: [] }),
 
       addToCart: (product) =>
         set((state) => ({
-          cart: state.cart.some((item) =>
-            sameProduct(item.id, product.id),
-          )
+          cart: state.cart.some((item) => sameProduct(item.id, product.id))
             ? state.cart.map((item) =>
-                sameProduct(item.id, product.id)
-                  ? { ...item, quantity: item.quantity + 1 }
-                  : item,
-              )
+              sameProduct(item.id, product.id)
+                ? { ...item, quantity: item.quantity + 1 }
+                : item,
+            )
             : [...state.cart, { ...product, quantity: 1 }],
         })),
 
       toggleCart: (product) =>
         set((state) => ({
-          cart: state.cart.some((item) =>
-            sameProduct(item.id, product.id),
-          )
-            ? state.cart.filter(
-                (item) => !sameProduct(item.id, product.id),
-              )
+          cart: state.cart.some((item) => sameProduct(item.id, product.id))
+            ? state.cart.filter((item) => !sameProduct(item.id, product.id))
             : [...state.cart, { ...product, quantity: 1 }],
         })),
 
@@ -64,12 +52,11 @@ export const useProductStore = create(
 
       setQuantity: (id, quantity) =>
         set((state) => ({
-          cart:
-            quantity <= 0
-              ? state.cart.filter((item) => !sameProduct(item.id, id))
-              : state.cart.map((item) =>
-                  sameProduct(item.id, id) ? { ...item, quantity } : item,
-                ),
+          cart: quantity <= 0
+            ? state.cart.filter((item) => !sameProduct(item.id, id))
+            : state.cart.map((item) =>
+              sameProduct(item.id, id) ? { ...item, quantity } : item,
+            ),
         })),
 
       removeFromCart: (id) =>
@@ -90,17 +77,10 @@ export const useProductStore = create(
   ),
 )
 
-export const useShopStore = useProductStore
-
 export const selectFavoritesCount = (state) => state.favorites.length
-
 export const selectCartCount = (state) =>
   state.cart.reduce((total, item) => total + item.quantity, 0)
-
 export const selectCartTotal = (state) =>
-  state.cart.reduce(
-    (total, item) => total + Number(item.price) * item.quantity,
-    0,
-  )
+  state.cart.reduce((total, item) => total + Number(item.price) * item.quantity, 0)
 
 export default useProductStore

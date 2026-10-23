@@ -2,7 +2,7 @@ const API = "https://api.escuelajs.co/api/v1"
 
 import axios from "axios";
 
-export const api = axios.create({ baseURL: 'http://localhost:3001' })
+export const api = axios.create({  baseURL: 'https://api.escuelajs.co/api/v1'})
 
 export const getProducts = async ({ q, category, sort, order }) => {
     const { data } = await api.get('/products', {
@@ -24,4 +24,49 @@ export const patchProduct = ({ id, ...changes }) => api.patch(`/products/${id}`,
 export const updateProduct = async ({ id, changes }) => {
   const { data } = await api.patch(`/products/${id}`, changes);
   return data;
+}
+
+export async function getProducts(params = {}) {
+  const { data } = await api.get('/products', { params })
+  return Array.isArray(data) ? data : []
+}
+
+export async function getProduct(id) {
+  const { data } = await api.get(`/products/${id}`)
+  return data
+}
+
+export async function getCategories() {
+  const { data } = await api.get('/categories')
+  return Array.isArray(data) ? data : []
+}
+
+export async function createProduct(product) {
+  const { data } = await api.post('/products/', product)
+  return data
+}
+
+export async function deleteProduct(id) {
+  const { data } = await api.delete(`/products/${id}`)
+  return data
+}
+
+const OWNER_KEY = 'forme-owned-products'
+export const OWNER_PREFIX = 'Nikiskova'
+
+export function rememberOwnedProduct(id) {
+  const ids = getOwnedProductIds()
+  if (!ids.includes(id)) localStorage.setItem(OWNER_KEY, JSON.stringify([...ids, id]))
+}
+
+export function getOwnedProductIds() {
+  try {
+    return JSON.parse(localStorage.getItem(OWNER_KEY) || '[]')
+  } catch {
+    return []
+  }
+}
+
+export function isOwnedProduct(product) {
+  return Boolean(product && getOwnedProductIds().includes(product.id))
 }

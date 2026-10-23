@@ -7,16 +7,7 @@ export default function MainLayout() {
 
   return (
     <div className="container">
-      <header className="header">
-        <Link to="/" className="logo">
-          <Header />
-        </Link>
-
-        <nav>
-          <Link to="/">Каталог</Link>
-          <Link to="/favorites">Избранное</Link>
-        </nav>
-      </header>
+      <Header />
 
       <main>
         <Outlet />

@@ -1,21 +1,27 @@
-import React from 'react';
+import { Link } from 'react-router-dom'
+import { useProductStore } from '../store/useProductStore.jsx'
+import ProductsList from '../components/ProductsList'
 
-const FavoritesPage = () => {
-    return (
+export default function FavoritesPage() {
+  const favorites = useProductStore((state) => state.favorites)
+
+  return (
+    <div >
+      <div>
+        <h1>Избранное.</h1>
+      </div>
+
+      {favorites.length ? (
+        <ProductsList products={favorites} />
+      ) : (
         <div>
-            <ul style={{
-                textDecoration: 'none'
-            }}>
-                {favorites.map((product) => (
-                    <ProductCard
-                        key={product.id}
-                        product={product}
-                        onDoubleClick={() => handleEdit(product)}
-                    />
-                ))}
-            </ul>
+          <h3>Пока ничего не сохранено</h3>
+          <p>Нажмите на сердечко у товара, чтобы добавить его сюда.</p>
+          <Link to="/" >
+            Перейти в каталог 
+          </Link>
         </div>
-    );
+      )}
+    </div>
+  )
 }
-
-export default FavoritesPage;
