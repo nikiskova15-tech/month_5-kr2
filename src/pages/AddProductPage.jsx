@@ -35,7 +35,7 @@ export default function AddProductPage() {
     }
 
     return (
-        <section className="form-page">
+        <section>
             <div>
                 <p>
                     {editing

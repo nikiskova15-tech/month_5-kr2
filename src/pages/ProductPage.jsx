@@ -33,7 +33,7 @@ export default function ProductPage() {
     })
 
     if (isLoading) return <Loader />
-    if (error || !product) return <div className="notice notice-error">Не удалось загрузить этот товар.</div>
+    if (error || !product) return <div>Не удалось загрузить этот товар.</div>
     const owned = isOwnedProduct(product)
     const image = product.images?.find((url) => typeof url === 'string' && /^https?:/.test(url))
     const favorite = favorites.some((item) => item.id === product.id)
@@ -51,8 +51,7 @@ export default function ProductPage() {
                         onClick={() => addToCart(product)}>
                         Добавить в корзину
                     </button>
-                    <button className={` ${favorite ? 'active' : ''}`}
-                        onClick={() => toggleFavorite(product)} aria-label="">
+                    <button onClick={() => toggleFavorite(product)}>
                         {favorite ? 'Добавить в избранное' : 'Убрать из избранного'}</button>
                 </div>
                 <div>

@@ -9,13 +9,13 @@ export default function ProductFilters({ categories = [] }) {
         return next
     }, { replace: true })
 
-    return <div className="filters">
-        <label className="search-field"><span>⌕</span><input aria-label="Поиск товаров" placeholder="Найти предмет..." value={params.get('title') || ''} onChange={(event) => setFilter('title', event.target.value)} /></label>
+    return <div>
+        <label><span>⌕</span><input aria-label="Поиск товаров" placeholder="Найти предмет..." value={params.get('title') || ''} onChange={(event) => setFilter('title', event.target.value)} /></label>
         <select aria-label="Категория" value={params.get('categoryId') || ''} onChange={(event) => setFilter('categoryId', event.target.value)}>
             <option value="">Все категории</option>
             {categories.map((category) => <option key={category.id} value={category.id}>{category.name}</option>)}
         </select>
-        <div className="price-fields">
+        <div>
             <input
                 type="number"
                 min="0"

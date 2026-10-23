@@ -46,15 +46,14 @@ export default function HomePage() {
         <section id="catalog" >
             <ProductFilters categories={categories} />
             {error
-                ? <div className="notice notice-error">Каталог временно недоступен. Попробуйте обновить страницу.</div>
+                ? <div>Каталог временно недоступен. Попробуйте обновить страницу.</div>
                 : isLoading
                     ? <Loader />
                     : <>
-                        <div className={isFetching ? 'grid-wrap fetching' : 'grid-wrap'}>
+                        <div>
                             <ProductsList products={products} />
                         </div>
                         <div>
-                            <span>СТРАНИЦА {String(page).padStart(2, '0')}</span>
                             <div>
                                 <button disabled={page <= 1}
                                     onClick={() => goToPage(page - 1)}>ПРошлая страница</button>

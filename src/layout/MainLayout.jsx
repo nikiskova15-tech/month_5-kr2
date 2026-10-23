@@ -6,7 +6,7 @@ export default function MainLayout() {
   const navigation = useNavigation();
 
   return (
-    <div className="container">
+    <div>
       <Header />
 
       <main>

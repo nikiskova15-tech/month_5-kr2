@@ -23,11 +23,11 @@ export default function CartPage() {
                                 </Link>
 
                                 <div >
-                                    <Link to={`/products/${item.id}`} className="product-title">
+                                    <Link to={`/products/${item.id}`} >
                                         {item.title}
                                     </Link>
                                     <span>{item.category?.name}</span>
-                                    <div className="quantity">
+                                    <div>
                                         <button
                                             onClick={() => changeQuantity(item.id, -1)}
                                         >
@@ -50,19 +50,11 @@ export default function CartPage() {
                         ))}
                     </div>
 
-                    <aside >
-                        <p>ИТОГО</p>
-                        <div><span>Товары</span><b>{(total)}</b></div>
                         <div >
                             <span>Итого</span>
                             <b>{(total + (total > 150 ? 0 : 12))}</b>
                         </div>
-                        <button type='primary'
-                            onClick={() => window.alert('Оформление заказа скоро появится.')}
-                        >
-                            Перейти к оформлению
-                        </button>
-                    </aside>
+                    
                 </div>
             ) : (
                 <div>

@@ -54,7 +54,7 @@ export default function ProductForm({ product, editing = false }) {
 
     if (editing && !isOwnedProduct(product)) return <div>Редактировать можно только свои товары.</div>
 
-    return <form className="product-form" onSubmit={submit}>
+    return <form onSubmit={submit}>
         <label>Название
             <input
                 required
@@ -89,7 +89,7 @@ export default function ProductForm({ product, editing = false }) {
                 onChange={(event) => setDescription(event.target.value)} placeholder="O товаре..." />
         </label>
         <label>Ссылки на изображения
-            <span className="field-hint">Каждая ссылка — с новой строки</span>
+            <span>Каждая ссылка — с новой строки</span>
             <textarea
                 rows="3"
                 required
@@ -97,7 +97,7 @@ export default function ProductForm({ product, editing = false }) {
                 onChange={(event) => setImages(event.target.value)}
                 placeholder="https://..." />
         </label>
-        {message && <div className="notice notice-error">{String(message)}</div>}
+        {message && <div >{String(message)}</div>}
         <div >
             <button>
                 {mutation.isPending ? 'Сохраняем...' : editing ? 'Сохранить изменения' : 'Опубликовать товар'}
